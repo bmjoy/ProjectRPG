@@ -1,0 +1,33 @@
+/*
+  Item suffixes
+    CritChance,
+    Haste,
+    Armor,
+    Damage
+*/
+[
+  {
+    "Stat": "CritChance",
+    "Name": "of Crit",
+    "MinValue": 2,
+    "MaxValue": 5
+  },
+  {
+    "Stat": "Haste",
+    "Name": "of Haste",
+    "MinValue": 2,
+    "MaxValue": 5
+  },
+  {
+    "Stat": "Armor",
+    "Name": "of Armor",
+    "MinValue": 2,
+    "MaxValue": 5
+  },
+  {
+    "Stat": "Damage",
+    "Name": "of Damage",
+    "MinValue": 2,
+    "MaxValue": 5
+  }
+]

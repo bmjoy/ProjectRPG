@@ -1,0 +1,44 @@
+[
+  {
+    "Name": "Enemy 1",
+    "SpriteName": "Enemy",
+    "Stats": {
+      "Strength": 4,
+      "Dexterity": 3,
+      "Intelligence": 2,
+      "Stamina": 4,
+      "CritChance": 5,
+      "Haste": 5,
+      "Armor": 0,
+      "Damage": 5
+    }
+  },
+  {
+    "Name": "Enemy 2",
+    "SpriteName": "Enemy2",
+    "Stats": {
+      "Strength": 3,
+      "Dexterity": 4,
+      "Intelligence": 4,
+      "Stamina": 2,
+      "CritChance": 5,
+      "Haste": 5,
+      "Armor": 0,
+      "Damage": 3
+    }
+  },
+  {
+    "Name": "Enemy 3",
+    "SpriteName": "Enemy3",
+    "Stats": {
+      "Strength": 1,
+      "Dexterity": 4,
+      "Intelligence": 6,
+      "Stamina": 5,
+      "CritChance": 5,
+      "Haste": 5,
+      "Armor": 0,
+      "Damage": 8
+    }
+  }
+]

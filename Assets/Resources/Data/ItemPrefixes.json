@@ -1,0 +1,34 @@
+/*
+  Item Prefixes
+    Strength,
+    Dexterity,
+    Intelligence,
+    Stamina,
+*/
+
+[
+  {
+    "Stat": "Strength",
+    "Name": "of Strength",
+    "MinValue": 2,
+    "MaxValue": 5
+  },
+  {
+    "Stat": "Dexterity",
+    "Name": "of Dexterity",
+    "MinValue": 2,
+    "MaxValue": 5
+  },
+  {
+    "Stat": "Intelligence",
+    "Name": "of Intelligence",
+    "MinValue": 2,
+    "MaxValue": 5
+  },
+  {
+    "Stat": "Stamina",
+    "Name": "of Stamina",
+    "MinValue": 2,
+    "MaxValue": 5
+  }
+]
