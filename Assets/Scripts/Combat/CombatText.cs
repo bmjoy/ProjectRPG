@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 
-//TODO: hacky hacky
+//TODO: hacky hacky this should be combined with the messageManager, both are showing messages on screen.
 public class CombatText : MonoBehaviour
 {
     [SerializeField] private static GameObject combatTextPrefab;

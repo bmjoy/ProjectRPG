@@ -8,31 +8,26 @@ using System.Threading.Tasks;
 
 static class Extensions
 {
-    //Return a random element from an array
+    /// <summary>
+    /// Returns a random element from the list.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <returns>A random list element</returns>
     public static T GetRandom<T>(this List<T> list)
     {
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
 
+    /// <summary>
+    /// Returns a random element from the array.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="array"></param>
+    /// <returns>A random array element</returns>
     public static T GetRandom<T>(this T[] array)
     {
         return array[UnityEngine.Random.Range(0, array.Length)];
-    }
-
-    public static List<T> GetRandom<T>(this List<T> list, int amount)
-    {
-        List<T> items = new List<T>();
-
-        for (int i = 0; i < amount; i++)
-        {
-            var randomElement = list[UnityEngine.Random.Range(0, amount + 1)];
-
-            if (!items.Contains(randomElement))
-                items.Add(randomElement);
-            else i--;
-        }
-
-        return items;
     }
 }
 

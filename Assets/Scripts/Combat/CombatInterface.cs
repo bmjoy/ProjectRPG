@@ -10,10 +10,12 @@ public class CombatInterface : MonoBehaviour
 
     private GameObject TurnIndicator;
     private Character CurrentFighter;
+    private CombatMouseController combatMouseController;
 
     private void Start()
     {
         CombatController.Instance.OnTurnOrderChanged += OnTurnOrderChanged;
+        combatMouseController = FindObjectOfType<CombatMouseController>();
     }
 
     private void OnTurnOrderChanged(Character character)
@@ -24,11 +26,17 @@ public class CombatInterface : MonoBehaviour
 
     private void DrawTurnIndicator()
     {
+        if(CurrentFighter == null)
+        {
+            Debug.LogError("We don't have a character to draw our turn indicator at");
+            return;
+        }
+
         if (TurnIndicator == null)
             TurnIndicator = Instantiate(TurnIndicatorPrefab, CurrentFighter.Visual.transform);
         else
         {
-            TurnIndicator.transform.parent = CurrentFighter?.Visual?.transform;
+            TurnIndicator.transform.parent = CurrentFighter.Visual.transform;
             TurnIndicator.transform.localPosition = new Vector3(0, 0.5f, 0);
         }
     }
@@ -38,7 +46,7 @@ public class CombatInterface : MonoBehaviour
         if (CurrentFighter.IsMyTurn && CurrentFighter.IsHero)
         {
             MessageManager.Instance.ShowMessage("Select a target");
-            FindObjectOfType<CombatMouseController>().OnMouseClickTargetCallback += SelectTarget;
+            combatMouseController.OnMouseClickTargetCallback += SelectTarget;
         }
     }
 
@@ -50,20 +58,7 @@ public class CombatInterface : MonoBehaviour
         }
     }
 
-    //TODO: Take this class under handen.
-    //TODO: Better way of showing which enemy is which, health panels not clear enough.
-    public void SpawnText(Character characterToSpawnAt, string text)
-    {
-        var newText = Instantiate(FloatingDamageTextPrefab, RandomizeFloatingTextPosition(characterToSpawnAt), Quaternion.identity, transform);
-
-        newText.GetComponent<TextMeshProUGUI>().text = text;
-    }
-
-    private Vector3 RandomizeFloatingTextPosition(Character characterToSpawnAt)
-    {
-        return Camera.main.WorldToScreenPoint(characterToSpawnAt.Visual.Position + new Vector3(UnityEngine.Random.Range(-0.1f,0.1f), 1.25f, 0));
-    }
-
+    //TODO: this shouldn't be here
     private void SelectTarget(CharacterVisual target)
     {
         var enemy = target.character;
@@ -77,7 +72,8 @@ public class CombatInterface : MonoBehaviour
                 MessageManager.Instance.ShowMessage("Perhaps you shouldn't target yourself or your team mates");
                 return;
         }
+
         CombatController.Instance.NextTurn();
-        FindObjectOfType<CombatMouseController>().OnMouseClickTargetCallback -= SelectTarget;
+        combatMouseController.OnMouseClickTargetCallback -= SelectTarget;
     } 
 }

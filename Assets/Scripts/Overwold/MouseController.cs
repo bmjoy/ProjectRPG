@@ -10,6 +10,7 @@ public class MouseController : MonoBehaviour
 {
     public PlayerMovement playerMovement;
     private RaycastHit2D raycastHit;
+
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();

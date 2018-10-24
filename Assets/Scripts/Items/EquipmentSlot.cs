@@ -22,7 +22,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IItemSlot
 
         if (sprite == null)
         {
-            sprite = SpriteData.GetSprite(itemType + "PlaceHolder");
+            sprite = SpriteManager.GetSprite(itemType + "PlaceHolder");
             GetComponent<Image>().sprite = sprite;
         }
     }

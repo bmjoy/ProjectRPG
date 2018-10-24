@@ -19,7 +19,7 @@ public class Tooltip : MonoBehaviour
     private void LateUpdate()
     {
         if (TooltipWindow.activeSelf)
-            TooltipWindow.transform.position = Input.mousePosition + new Vector3(75, -75,0);
+            TooltipWindow.transform.position = Input.mousePosition + new Vector3(65, -65,0);
     }
 
     public void Show(string textToShow)

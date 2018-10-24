@@ -22,8 +22,6 @@ public class CharacterSheet : MonoBehaviour
     [SerializeField] private Transform textWithTooltipParent;
     private TextWithTooltip[] statTexts;
 
-    [Header("Inventory")]
-
     private CrossSceneDataManager dataManager;
     private Hero selectedHero;
     private Inventory inventory;
@@ -33,6 +31,7 @@ public class CharacterSheet : MonoBehaviour
         dataManager = FindObjectOfType<CrossSceneDataManager>();
         inventory = FindObjectOfType<Inventory>();
         selectedHero = dataManager.Party[0];
+
         selectedHero.equipmentManager.OnItemChangedCallback += UpdateStats;
         
         InitHeroSelectionPanel();
@@ -47,6 +46,7 @@ public class CharacterSheet : MonoBehaviour
             var index = i;
             var hero = dataManager.Party[index];
             var heroSelection = Instantiate(heroSelectionPrefab, heroSelectionParent);
+
             heroSelection.GetComponentInChildren<Text>().text = $"{hero.Name}\n{hero.CharClass}";
             heroSelection.GetComponent<Button>().onClick.AddListener(() => SelectHero(index));
         }
@@ -87,7 +87,7 @@ public class CharacterSheet : MonoBehaviour
             else
                 statTexts[i].SetText(statType, selectedHero.Stats.GetCurrentStatValue(statType).ToString());
 
-            statTexts[i].SetTooltip(StatStrings.GetStatString(statType));
+            statTexts[i].SetTooltip(StatStrings.GetStatTooltip(statType));
         }
     }
 
@@ -112,13 +112,9 @@ public class CharacterSheet : MonoBehaviour
         //Change hero and attach event
         selectedHero = dataManager.Party[index];
         selectedHero.equipmentManager.OnItemChangedCallback += UpdateStats;
-        Debug.Log($"Selected Hero {selectedHero.Name}");
 
         UpdateEquipment();
         UpdateStats();
-        //Change equipment
-        //Change stats
-        //Show new selected hero as highlighted
     }
 }
 

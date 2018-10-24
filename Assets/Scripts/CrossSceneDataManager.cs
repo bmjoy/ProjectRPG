@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
+//TODO: this doesn't take care of just data anymore.
 public class CrossSceneDataManager : MonoBehaviour
 {
     public static CrossSceneDataManager Instance { get; private set; }

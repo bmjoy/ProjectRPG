@@ -11,9 +11,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         destination = transform.position;
-
-        //TODO: remove after testing
-        var x = ItemGenerator.CreateNewItem();
     }
 
     void Update()

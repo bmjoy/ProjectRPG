@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public static class SpriteData
+public static class SpriteManager
 {
     private static List<Sprite> sprites;
 
@@ -14,9 +14,9 @@ public static class SpriteData
         if(sprites == null)
             LoadSprites();
 
-        if(sprites.Any(sp => sp.name == spriteName))
-            return sprites.First(sp => sp.name == spriteName);
-
+        var sprite = sprites.First(sp => sp.name == spriteName);
+        if (sprite != null)
+            return sprite;
         else
         {
             Debug.LogError($"Couldnt find sprite {spriteName}");

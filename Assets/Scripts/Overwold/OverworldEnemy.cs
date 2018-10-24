@@ -15,7 +15,7 @@ public class OverworldEnemy : MonoBehaviour, IWorldObject
         get
         {
             var text = "";
-            enemies.ForEach(x => text += x.Name + "\n");
+            enemies.ForEach(enemy => text += enemy.Name + "\n");
             return text;
         }
     }
@@ -40,7 +40,7 @@ public class OverworldEnemy : MonoBehaviour, IWorldObject
 
     private void GetNewDestination()
     {
-        destination = Random.insideUnitCircle * 2;
+        destination = (Vector2)transform.position + Random.insideUnitCircle * 2;
         LookTowardsDestination();
     }
 

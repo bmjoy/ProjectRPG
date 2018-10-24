@@ -16,11 +16,6 @@ public static class ItemGenerator
             LoadData();
         }
 
-        //Item mods
-        // 2 prefixes
-        // 1 suffix
-        // weapon 1 extra for damage
-        // armor 1 extra for armor roll
         var itemMods = new List<ItemMod>();
 
         //Add armor for armors and damage for weapons.
@@ -28,15 +23,14 @@ public static class ItemGenerator
         {
             case var expression when (type == ItemTypes.Armor || type == ItemTypes.Boots || type == ItemTypes.Gloves || type == ItemTypes.Helmet || type == ItemTypes.Shield):
                 itemMods.Add(GetSuffixByStat(StatTypes.Armor));
-
                 break;
             case ItemTypes.Weapon:
                 itemMods.Add(GetSuffixByStat(StatTypes.Damage));
                 break;
         }
 
-        itemMods.AddRange( GetRandomPrefixes( UnityEngine.Random.Range(1,2 + 1) ));
-        itemMods.AddRange( GetRandomSuffixes(1) );
+        itemMods.AddRange(GetRandomPrefixes(UnityEngine.Random.Range(1,2 + 1)));
+        itemMods.AddRange(GetRandomSuffixes(1));
 
         return itemMods;
     }
@@ -50,7 +44,7 @@ public static class ItemGenerator
     public static Item CreateNewItem()
     {
         var itemType = (ItemTypes)UnityEngine.Random.Range(0, Enum.GetNames(typeof(ItemTypes)).Length);
-        var sprite = SpriteData.GetSprite(itemType.ToString());
+        var sprite = SpriteManager.GetSprite(itemType.ToString());
 
         return new Item(GetItemMods(itemType), itemType, sprite);
     }
@@ -61,6 +55,7 @@ public static class ItemGenerator
         for (int i = 0; i < amount; i++)
         {
             var randomPrefix = new ItemMod(itemPrefixes.GetRandom());
+
             if (list.Any(mod => mod.Stat == randomPrefix.Stat))
                 list.First(mod => mod.Stat == randomPrefix.Stat).Value += randomPrefix.Value;
             else
@@ -76,6 +71,7 @@ public static class ItemGenerator
         for (int i = 0; i < amount; i++)
         {
             var randomSuffix = new ItemMod(itemSuffixes.GetRandom());
+
             if (list.Any(mod => mod.Stat == randomSuffix.Stat))
                 list.First(mod => mod.Stat == randomSuffix.Stat).Value += randomSuffix.Value;
             else

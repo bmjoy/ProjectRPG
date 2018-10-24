@@ -11,7 +11,7 @@ public class GameInterfaceManager : MonoBehaviour
 
     [SerializeField] private GameObject characterSheet;
 
-    private Dictionary<GameInterface, GameObject> interfaceGameObjectDictionary;
+    private Dictionary<GameInterface, GameObject> interfaces;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class GameInterfaceManager : MonoBehaviour
 
     private void Start()
     {
-        interfaceGameObjectDictionary = new Dictionary<GameInterface, GameObject>()
+        interfaces = new Dictionary<GameInterface, GameObject>()
         {
             { GameInterface.CharacterSheet, characterSheet }
         };
@@ -35,7 +35,7 @@ public class GameInterfaceManager : MonoBehaviour
 
     public void OpenInterface(GameInterface interfaceToOpen)
     {
-        if (!interfaceGameObjectDictionary.ContainsKey(interfaceToOpen))
+        if (!interfaces.ContainsKey(interfaceToOpen))
         {
             Debug.LogError($"Trying to open {interfaceToOpen} but it doesn't exist");
             return;
@@ -46,7 +46,7 @@ public class GameInterfaceManager : MonoBehaviour
 
     public void CloseAllInterfaces()
     {
-        foreach (var inter in interfaceGameObjectDictionary)
+        foreach (var inter in interfaces)
         {
             inter.Value.SetActive(false);
         }
@@ -54,13 +54,14 @@ public class GameInterfaceManager : MonoBehaviour
 
     private void ToggleInterfaceDisableRest(GameInterface gameInterface)
     {
-        foreach (var panel in interfaceGameObjectDictionary)
+        foreach (var panel in interfaces)
         {
             if (panel.Key != gameInterface)
                 panel.Value.SetActive(false);
             else
                 panel.Value.SetActive(!panel.Value.activeSelf);
         }
+        Tooltip.Instance.Hide();
     }
 }
 

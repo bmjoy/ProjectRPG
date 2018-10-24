@@ -10,7 +10,7 @@ public class Enemy : Character
     public Enemy(EnemyPreset preset) : base(preset)
     {
         Name = $"Enemy {Random.Range(0,110)}";
-        Sprite = SpriteData.GetSprite(preset.SpriteName);
+        Sprite = SpriteManager.GetSprite(preset.SpriteName);
     }
 
     private Character GetEnemyTarget()

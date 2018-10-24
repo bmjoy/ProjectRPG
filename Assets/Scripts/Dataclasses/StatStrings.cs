@@ -19,7 +19,7 @@ public static class StatStrings
         {StatTypes.Strength, "Increases physical damage dealt" },
     };
 
-    public static string GetStatString(StatTypes statType)
+    public static string GetStatTooltip(StatTypes statType)
     {
         return statStrings[statType];
     }
