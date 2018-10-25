@@ -18,14 +18,13 @@ public class CombatController : MonoBehaviour
     public List<Character> HeroParty { get; private set; }
     public List<Character> allCharacters { get; private set; }
 
-    private Queue<Character> turnOrder;
+    private TurnOrder turnOrder;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
-        turnOrder = new Queue<Character>();
         allCharacters = new List<Character>();
         SpawnCharacters();
     }
@@ -70,9 +69,10 @@ public class CombatController : MonoBehaviour
     private void StartCombat()
     {
         allCharacters = HeroParty.Concat(EnemyParty).ToList();
+        turnOrder = new TurnOrder(allCharacters, this);
+
         foreach (var character in allCharacters.OrderByDescending(character => character.Stats.Dexterity))
         {
-            turnOrder.Enqueue(character);
             OnTurnOrderChanged += character.CheckIfMyTurn;
             character.Stats.OnDeathCallback += RemoveFromTurnOrder;
         }
@@ -82,17 +82,7 @@ public class CombatController : MonoBehaviour
 
     public void NextTurn()
     {
-        if(allCharacters.Contains(turnOrder.Peek()))
-            CurrentCharacter = turnOrder.Dequeue();
-        else
-        {
-            turnOrder.Dequeue();
-            CurrentCharacter = turnOrder.Dequeue();
-        }
-
-        OnTurnOrderChanged?.Invoke(CurrentCharacter);
-
-        turnOrder.Enqueue(CurrentCharacter);
+        turnOrder.NextTurn();
     }
 
     private void RemoveFromTurnOrder(Character character)
@@ -105,6 +95,7 @@ public class CombatController : MonoBehaviour
             case Enemy e:
                 allCharacters.Remove(character);
                 EnemyParty.Remove(e);
+                turnOrder.Remove(character);
 
                 if(EnemyParty.Count == 0)
                     FindObjectOfType<LootGenerator>().SpawnLoot();

@@ -25,7 +25,10 @@ public class PlayerMovement : MonoBehaviour
             destination = target.Position;
 
             if(Vector3.Distance(transform.position, destination) < 0.25f)
+            {
                 target.Interact();
+                target = null;
+            }
         }
 
         if(transform.position != destination)

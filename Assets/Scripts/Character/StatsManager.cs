@@ -93,7 +93,7 @@ public class StatsManager
         var baseDmg = GetBaseDamage(ability);
         var dmgRange = (int)UnityEngine.Random.Range(baseDmg * 0.8f, baseDmg);
 
-        var randomNumb = UnityEngine.Random.Range(1,100);
+        var randomNumb = UnityEngine.Random.Range(0,100);
 
         //Check if we crit
         if (randomNumb <= GetCurrentStatValue(StatTypes.CritChance))

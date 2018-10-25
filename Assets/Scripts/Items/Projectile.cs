@@ -22,6 +22,9 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+        if (target == null)
+            Destroy(gameObject);
+
         transform.position = Vector2.MoveTowards(transform.position, target.Position, 10 * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, target.Position) < 0.1f)

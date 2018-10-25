@@ -36,7 +36,7 @@ public class CombatInterface : MonoBehaviour
 
     private void DrawTurnIndicator()
     {
-        if(CurrentFighter == null)
+        if(CurrentFighter.Visual == null)
         {
             Debug.LogError("We don't have a character to draw our turn indicator at");
             return;

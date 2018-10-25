@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventorySlot inventorySlotsPrefab;
     [SerializeField] private Transform inventorySlotsParent;
     [SerializeField] private int size;
+
+    [SerializeField] private Text moneyText;
+    public int Money { get; private set; }
+
     private List<IItemSlot> inventorySlots;
 
     void Start()
@@ -92,5 +97,17 @@ public class Inventory : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    public void IncreaseMoney(int amount)
+    {
+        Money += amount;
+        moneyText.text = $"{Money}";
+    }
+
+    public void DecreaseMoney(int amount)
+    {
+        Money -= amount;
+        moneyText.text = $"{Money}";
     }
 }
