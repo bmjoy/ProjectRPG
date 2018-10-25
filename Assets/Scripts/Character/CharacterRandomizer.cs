@@ -24,4 +24,10 @@ public static class CharacterRandomizer
         var sprite = SpriteManager.GetSprite("Player");
         return new Hero(sprite, GetClassPreset(GetRandomClass()));
     }
+
+    public static Hero GetHeroByClass(CharacterClass charclass)
+    {
+        var sprite = SpriteManager.GetSprite("Player");
+        return new Hero(sprite, GetClassPreset(charclass));
+    }
 }

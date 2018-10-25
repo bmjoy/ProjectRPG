@@ -27,14 +27,13 @@ public class StatsManager
 
         //Set max hp for hero alot higher than for enemies
         //TODO: make better
-        statValues[StatTypes.Health] = new Stat((character.IsHero ? 100 : 10) + (Stamina * 4), 0);
+        statValues[StatTypes.Health] = new Stat((character.IsHero ? 50 : 10) + (Stamina * 4), 0);
         statValues[StatTypes.Health].CurrentValue = GetBaseStatValue(StatTypes.Health);
     }
 
     public int Armor => GetCurrentStatValue(StatTypes.Armor);
     public int CritChance => GetCurrentStatValue(StatTypes.CritChance);
     public int CurrentHealth => GetCurrentStatValue(StatTypes.Health);
-    public DamageData Damage => CalculateDamage();
     public int Dexterity => GetCurrentStatValue(StatTypes.Dexterity);
     public int Haste => GetCurrentStatValue(StatTypes.Haste);
     public int Intelligence => GetCurrentStatValue(StatTypes.Intelligence);
@@ -89,9 +88,9 @@ public class StatsManager
         OnHealthChangedCallback?.Invoke();
     }
 
-    private DamageData CalculateDamage()
+    public DamageData CalculateDamage(Ability ability)
     {
-        var baseDmg = GetCurrentStatValue(StatTypes.Damage) + Strength;
+        var baseDmg = GetBaseDamage(ability);
         var dmgRange = (int)UnityEngine.Random.Range(baseDmg * 0.8f, baseDmg);
 
         var randomNumb = UnityEngine.Random.Range(1,100);
@@ -101,6 +100,24 @@ public class StatsManager
             return new DamageData(dmgRange * 2, true);
         else
             return new DamageData(dmgRange, false);
+    }
+
+    private int GetBaseDamage(Ability ability)
+    {
+        int baseDmg = ability.BaseDamage;
+        switch (ability.DamageType)
+        {
+            case DamageType.Magic:
+                baseDmg += Intelligence;
+                break;
+            case DamageType.Physical:
+                baseDmg += GetCurrentStatValue(StatTypes.Damage) + Strength;
+                break;
+            case DamageType.Ranged:
+                baseDmg += GetCurrentStatValue(StatTypes.Damage) + Dexterity;
+                break;
+        }
+        return baseDmg;
     }
 
     public void TakeDamage(DamageData dmgData)

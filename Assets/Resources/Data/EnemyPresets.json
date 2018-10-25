@@ -11,7 +11,10 @@
       "Haste": 5,
       "Armor": 0,
       "Damage": 5
-    }
+    },
+    "abilities": [
+      "Attack"
+    ]
   },
   {
     "Name": "Enemy 2",
@@ -25,7 +28,11 @@
       "Haste": 5,
       "Armor": 0,
       "Damage": 3
-    }
+    },
+    "abilities": [
+      "Shoot",
+      "Attack"
+    ]
   },
   {
     "Name": "Enemy 3",
@@ -33,12 +40,16 @@
     "Stats": {
       "Strength": 1,
       "Dexterity": 4,
-      "Intelligence": 6,
+      "Intelligence": 8,
       "Stamina": 5,
       "CritChance": 5,
       "Haste": 5,
       "Armor": 0,
       "Damage": 8
-    }
+    },
+    "abilities": [
+      "Fireball",
+      "Attack"
+    ]
   }
 ]

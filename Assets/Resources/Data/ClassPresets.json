@@ -10,7 +10,10 @@
       "Haste": 5,
       "Armor": 0,
       "Damage": 5
-    }
+    },
+    "abilities": [
+      "Attack"
+    ]
   },
   {
     "CharacterClass": "Mage",
@@ -23,7 +26,11 @@
       "Haste": 5,
       "Armor": 0,
       "Damage": 5
-    }
+    },
+    "abilities": [
+      "Attack",
+      "Fireball"
+    ]
   },
   {
     "CharacterClass": "Ranger",
@@ -36,6 +43,10 @@
       "Haste": 5,
       "Armor": 0,
       "Damage": 5
-    }
+    },
+    "abilities": [
+      "Attack",
+      "Shoot"
+    ]
   }
 ]

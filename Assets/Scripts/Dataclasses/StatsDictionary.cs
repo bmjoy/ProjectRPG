@@ -3,4 +3,5 @@
 public class StatsDictionary
 {
     public Dictionary<StatTypes, int> Stats;
+    public string[] abilities;
 }

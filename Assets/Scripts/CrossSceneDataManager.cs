@@ -22,11 +22,12 @@ public class CrossSceneDataManager : MonoBehaviour
         EnemyList = new List<EnemyData>();
         Party = new List<Hero>
         {
-            CharacterRandomizer.GetRandomHero(),
-            CharacterRandomizer.GetRandomHero()
+            CharacterRandomizer.GetHeroByClass(CharacterClass.Mage),
+            CharacterRandomizer.GetHeroByClass(CharacterClass.Ranger),
+            CharacterRandomizer.GetHeroByClass(CharacterClass.Warrior)
         };
 
-        for (int i = 0; i < Random.Range(0,3); i++)
+        for (int i = 0; i < Random.Range(0,2); i++)
         {
             Party.Add(CharacterRandomizer.GetRandomHero());
         }

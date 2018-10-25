@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class CombatMouseController : MonoBehaviour
 {
-    public GameObject TargetIndicatorPrefab;
-    private GameObject targetIndicator;
-
     public delegate void OnMouseClickTarget(CharacterVisual combatObject);
     public OnMouseClickTarget OnMouseClickTargetCallback;
+
+    private CombatInterface combatInterface;
+
+    private void Start()
+    {
+        combatInterface = FindObjectOfType<CombatInterface>();
+    }
 
     private void Update()
     {
@@ -22,7 +26,7 @@ public class CombatMouseController : MonoBehaviour
 
             if (combatTarget != null)
             {
-                ShowTargetIndicator(true, combatTarget);
+                combatInterface.ShowTargetIndicator(true, combatTarget);
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -31,19 +35,7 @@ public class CombatMouseController : MonoBehaviour
             }
         }
         else
-            ShowTargetIndicator(false, null);
+            combatInterface.ShowTargetIndicator(false, null);
     }
 
-    private void ShowTargetIndicator(bool shouldShow, CharacterVisual target)
-    {
-        if (targetIndicator == null)
-            targetIndicator = Instantiate(TargetIndicatorPrefab);
-
-        targetIndicator.SetActive(shouldShow);
-        if (target)
-        {
-            targetIndicator.transform.parent = target.transform;
-            targetIndicator.transform.position = target.transform.position;
-        }
-    }
 }

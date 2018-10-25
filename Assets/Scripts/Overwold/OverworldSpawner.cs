@@ -43,8 +43,8 @@ public class OverworldSpawner : MonoBehaviour
     private void SpawnNewEnemy()
     {
         var newEnemy = Instantiate(OverWorldEnemyPrefab).GetComponent<OverworldEnemy>();
-        newEnemy.enemies = GetRandomEnemies(1, 5);
-        newEnemy.transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
+        newEnemy.enemies = GetRandomEnemies(3, 5);
+        newEnemy.transform.position = new Vector3(Random.Range(-4, 4), Random.Range(-4, 4), 0);
         allEnemies.Add(newEnemy);
     }
 

@@ -19,13 +19,14 @@ public class Enemy : Character
         return party[Random.Range(0, party.Count)];
     }
 
-    public void Attack()
+    public void DecideMove()
     {
         if (IsMyTurn)
         {
             var target = GetEnemyTarget();
-            target.TakeDamage(Stats.Damage);
-            CombatController.Instance.NextTurn();
+            var ability = Abilities.GetRandom();
+            Attack(ability, target);
+            IsMyTurn = false;
         }
     }
 
@@ -35,7 +36,7 @@ public class Enemy : Character
         {
             moveTimer -= Time.deltaTime;
             if(moveTimer <=0)
-                Attack();
+                DecideMove();
         }
     }
 
