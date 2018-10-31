@@ -28,31 +28,46 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IItemSlot
 
         if (otherItem = eventData.pointerDrag.GetComponent<ItemVisual>())
         {
-            //If we drag an equipped item into our inventory check if we can swap them around.
-            if (otherItem.Slot.GetType() == typeof(EquipmentSlot))
+            switch (otherItem.Slot)
             {
-                var otherSlot = (EquipmentSlot)otherItem.Slot;
+                case EquipmentSlot eq:
+                        var eqSlot = (EquipmentSlot)otherItem.Slot;
+                        if (ItemVisual == null)
+                            eqSlot.currentSelectedHero.equipmentManager.UnequipItem(otherItem.Item, inventory, this);
+                        else if (ItemVisual.Item.Type != otherItem.Item.Type)
+                            return;
+                        else
+                            eqSlot.currentSelectedHero.equipmentManager.EquipItem(ItemVisual.Item, inventory);
+                    break;
 
-                if (ItemVisual == null)
-                    otherSlot.currentSelectedHero.equipmentManager.UnequipItem(otherItem.Item, inventory, this);
-                else if (ItemVisual.Item.Type != otherItem.Item.Type)
-                    return;
-                else
-                    otherSlot.currentSelectedHero.equipmentManager.EquipItem(ItemVisual.Item, inventory);
-            }
-            else
-            {
-                var otherSlot = otherItem.Slot;
+                case InventorySlot inv:
+                        var invSlot = otherItem.Slot;
 
-                if(ItemVisual == null)
-                {
-                    SetItem(otherItem.Item);
-                    otherSlot.Clear();
-                }
-                else
-                {
-                    inventory.SwapItems(ItemVisual.Item, otherItem.Item);
-                }
+                        if (ItemVisual == null)
+                        {
+                            SetItem(otherItem.Item);
+                            invSlot.Clear();
+                        }
+                        else
+                            inventory.SwapItems(ItemVisual.Item, otherItem.Item);
+                    break;
+
+                case LootItemSlot loot:
+                    var lootSlot = otherItem.Slot;
+
+                    if (ItemVisual == null)
+                    {
+                        SetItem(otherItem.Item);
+                        lootSlot.Clear();
+                    }
+                    else
+                        inventory.SwapItems(ItemVisual.Item, otherItem.Item);
+                    break;
+
+                case ShopItemSlot shop:
+                        var shopSlot = (ShopItemSlot)otherItem.Slot;
+                        shopSlot.shop.BuyItem(otherItem.Item);
+                    break;
             }
         }
     }

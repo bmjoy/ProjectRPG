@@ -14,7 +14,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IItemSlot
 
     public void SetData(Hero selectedHero, ItemTypes slotType, Item equippedItem, Inventory inventory)
     {
-        inventory.AddInventorySlots(this);
+        inventory.AddInventorySlot(this);
         currentSelectedHero = selectedHero;
         itemType = slotType;
         ItemVisual = ItemFactory.Instance.GetVisual(equippedItem);

@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 public enum GameInterface
 {
     CharacterSheet,
-    EscapeMenu
+    EscapeMenu,
+    Shop,
+    HireHero,
+    Dialogue,
+    Loot
 }
 

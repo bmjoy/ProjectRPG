@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventorySlot inventorySlotsPrefab;
     [SerializeField] private Transform inventorySlotsParent;
     [SerializeField] private int size;
-
+    [HideInInspector] public GameObject CharacterSheet;
     [SerializeField] private Text moneyText;
     public int Money { get; private set; }
 
@@ -36,6 +36,7 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             AddItemToInventory(ItemGenerator.CreateNewItem());
+            IncreaseMoney(500);
         }
     }
 
@@ -84,9 +85,14 @@ public class Inventory : MonoBehaviour
         return inventorySlots.First(x => x.ItemVisual?.Item == item);
     }
 
-    public void AddInventorySlots(IItemSlot slots)
+    public void AddInventorySlot(IItemSlot slot)
     {
-        inventorySlots.Add(slots);
+        inventorySlots.Add(slot);
+    }
+
+    public void RemoveInventorySlot(IItemSlot slot)
+    {
+        inventorySlots.Remove(slot);
     }
 
     public bool InventoryFull()
@@ -99,15 +105,33 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
+    //Move to seperate class?
     public void IncreaseMoney(int amount)
     {
         Money += amount;
         moneyText.text = $"{Money}";
     }
 
-    public void DecreaseMoney(int amount)
+    public bool DecreaseMoney(int amount)
     {
-        Money -= amount;
-        moneyText.text = $"{Money}";
+        if(Money >= amount)
+        {
+            Money -= amount;
+            moneyText.text = $"{Money}";
+            return true;
+        }
+        return false;
+    }
+
+    public void SetTempParent(Transform newParent)
+    {
+        inventorySlotsParent.parent.SetParent(newParent);
+        inventorySlotsParent.parent.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+    }
+
+    public void ResetParent()
+    {
+        inventorySlotsParent.parent.SetParent(CharacterSheet.transform);
+        inventorySlotsParent.parent.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 }

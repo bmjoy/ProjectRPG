@@ -58,11 +58,11 @@ public class CombatController : MonoBehaviour
 
     private void SpawnPlayer(CrossSceneDataManager characterData)
     {
-        for (int i = 0; i < characterData.Party.Count; i++)
+        for (int i = 0; i < Party.Instance.Members.Count; i++)
         {
             var playerChar = Instantiate(combatCharacterPrefab, partyPositions.GetChild(i).transform.position, Quaternion.identity, combatInterface.transform);
-            playerChar.GetComponent<CharacterVisual>().Initialize(characterData.Party[i]);
-            HeroParty.Add(characterData.Party[i]);
+            playerChar.GetComponent<CharacterVisual>().Initialize(Party.Instance.Members[i]);
+            HeroParty.Add(Party.Instance.Members[i]);
         }
     }
 
@@ -87,15 +87,21 @@ public class CombatController : MonoBehaviour
 
     private void RemoveFromTurnOrder(Character character)
     {
+        OnTurnOrderChanged -= character.CheckIfMyTurn;
+        allCharacters.Remove(character);
+        turnOrder.Remove(character);
+
         switch (character)
         {
             case Hero h:
-                //TODO: Hero is invincible atm.
+                HeroParty.Remove(h);
+
+                if (HeroParty.Count == 0)
+                    Debug.LogError("We died Show some death screen");
                 break;
+
             case Enemy e:
-                allCharacters.Remove(character);
                 EnemyParty.Remove(e);
-                turnOrder.Remove(character);
 
                 if(EnemyParty.Count == 0)
                     FindObjectOfType<LootGenerator>().SpawnLoot();

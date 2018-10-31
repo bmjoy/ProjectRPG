@@ -8,12 +8,7 @@ public class Chest : MonoBehaviour
 
     private void OnMouseDown()
     {
-        var inventory = FindObjectOfType<Inventory>();
-        for (int i = 0; i < items.Count; i++)
-        {
-            inventory.AddItemToInventory(items[i]);
-        }
-        CrossSceneDataManager.Instance.EndCombat(true);
+        GameInterfaceManager.Instance.ShowLootWindow(items);
     }
 
     public void AddItem(Item item)

@@ -30,9 +30,11 @@ public class CharacterSheet : MonoBehaviour
     {
         dataManager = FindObjectOfType<CrossSceneDataManager>();
         inventory = FindObjectOfType<Inventory>();
-        selectedHero = dataManager.Party[0];
+        selectedHero = Party.Instance.Members[0];
 
         selectedHero.equipmentManager.OnItemChangedCallback += UpdateStats;
+        Party.Instance.OnPartyMemberAdded += AddHeroSelectionButton;
+        Party.Instance.OnPartyMemberRemoved += RemoveHeroSelectionButton;
         
         InitHeroSelectionPanel();
         InitializeEquipment();
@@ -41,15 +43,32 @@ public class CharacterSheet : MonoBehaviour
 
     private void InitHeroSelectionPanel()
     {
-        for (int i = 0; i < dataManager.Party.Count; i++)
+        for (int i = 0; i < Party.Instance.Members.Count; i++)
         {
             var index = i;
-            var hero = dataManager.Party[index];
+            var hero = Party.Instance.Members[index];
             var heroSelection = Instantiate(heroSelectionPrefab, heroSelectionParent);
 
-            heroSelection.GetComponentInChildren<Text>().text = $"{hero.Name}\n{hero.CharClass}";
+            heroSelection.GetComponentInChildren<Text>().text = $"{hero.Name}\n{hero.Class}";
             heroSelection.GetComponent<Button>().onClick.AddListener(() => SelectHero(index));
         }
+    }
+
+    private void AddHeroSelectionButton(Hero hero)
+    {
+        var index = Party.Instance.Members.IndexOf(hero);
+        var heroSelection = Instantiate(heroSelectionPrefab, heroSelectionParent);
+
+        heroSelection.GetComponentInChildren<Text>().text = $"{hero.Name}\n{hero.Class}";
+        heroSelection.GetComponent<Button>().onClick.AddListener(() => SelectHero(index));
+    }
+
+    private void RemoveHeroSelectionButton(Hero hero)
+    {
+        var index = Party.Instance.Members.IndexOf(hero);
+        var button = heroSelectionParent.GetChild(index);
+
+        Destroy(button);
     }
 
     private void InitializeEquipment()
@@ -110,7 +129,7 @@ public class CharacterSheet : MonoBehaviour
         selectedHero.equipmentManager.OnItemChangedCallback -= UpdateStats;
 
         //Change hero and attach event
-        selectedHero = dataManager.Party[index];
+        selectedHero = Party.Instance.Members[index];
         selectedHero.equipmentManager.OnItemChangedCallback += UpdateStats;
 
         UpdateEquipment();

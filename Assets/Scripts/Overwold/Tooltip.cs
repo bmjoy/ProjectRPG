@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour
@@ -14,12 +15,14 @@ public class Tooltip : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+
+        TooltipWindow.transform.SetAsLastSibling();
     }
 
     private void LateUpdate()
     {
         if (TooltipWindow.activeSelf)
-            TooltipWindow.transform.position = Input.mousePosition + new Vector3(65, -65,0);
+            TooltipWindow.transform.position = Input.mousePosition + new Vector3(90, -50,0);
     }
 
     public void Show(string textToShow)

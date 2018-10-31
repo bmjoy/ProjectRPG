@@ -9,7 +9,7 @@ public class ItemFactory : MonoBehaviour
 {
     public GameObject ItemVisualPrefab;
 
-    public static ItemFactory Instance;
+    public static ItemFactory Instance { get; private set; }
 
     private void Awake()
     {

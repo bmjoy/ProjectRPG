@@ -15,6 +15,6 @@ MonoBehaviour:
   AbilityName: Fireball
   Description: Shoots a ball of fire at the enemy
   DamageType: 1
-  BaseDamage: 10
+  BaseDamage: 8
   ResourceCost: 5
   projectileSprite: {fileID: 21300000, guid: f282938c96217cf44bb26b447da60872, type: 3}

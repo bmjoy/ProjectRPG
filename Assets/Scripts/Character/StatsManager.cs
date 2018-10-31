@@ -27,7 +27,7 @@ public class StatsManager
 
         //Set max hp for hero alot higher than for enemies
         //TODO: make better
-        statValues[StatTypes.Health] = new Stat((character.IsHero ? 50 : 10) + (Stamina * 4), 0);
+        statValues[StatTypes.Health] = new Stat((character.IsHero ? 50 : 15) + (Stamina * 4), 0);
         statValues[StatTypes.Health].CurrentValue = GetBaseStatValue(StatTypes.Health);
     }
 
@@ -51,12 +51,25 @@ public class StatsManager
         switch (statType)
         {
             case StatTypes.CritChance:
-                return statValues[StatTypes.CritChance].CurrentValue + (Dexterity / 4);
+                return statValues[StatTypes.CritChance].CurrentValue + (Dexterity / 5);
             case StatTypes.Haste:
-                return statValues[StatTypes.Haste].CurrentValue + (Intelligence / 4);
+                return statValues[StatTypes.Haste].CurrentValue + (Intelligence / 5);
             default:
                 return statValues[statType].CurrentValue;
         }
+    }
+
+    public void HealPercent(float percent)
+    {
+        float value = MaxHealth * (percent / 100);
+        Heal((int)value);
+    }
+
+    public void Heal(int amount)
+    {
+        var healthdiff = MaxHealth - CurrentHealth;
+        amount = healthdiff > amount ? amount : healthdiff;
+        IncreaseStat(StatTypes.Health, amount);
     }
 
     public void SetBaseStatValue(StatTypes statType, int value)
@@ -91,7 +104,7 @@ public class StatsManager
     public DamageData CalculateDamage(Ability ability)
     {
         var baseDmg = GetBaseDamage(ability);
-        var dmgRange = (int)UnityEngine.Random.Range(baseDmg * 0.8f, baseDmg);
+        var dmgRange = (int)UnityEngine.Random.Range(baseDmg * 0.7f, baseDmg);
 
         var randomNumb = UnityEngine.Random.Range(0,100);
 
@@ -130,17 +143,11 @@ public class StatsManager
 
         if (CurrentHealth <= 0)
         {
-            //TODO: Hero is invincible 
             if (character.IsHero)
-            {
-                statValues[StatTypes.Health].CurrentValue = GetBaseStatValue(StatTypes.Health);
-                OnHealthChangedCallback?.Invoke();
-            }
-            else
-            {
-                OnDeathCallback?.Invoke(character);
-                character.Visual.Destroy();
-            }
+                Party.Instance.RemovePartyMember((Hero)character);
+
+            OnDeathCallback?.Invoke(character);
+            character.Visual.Destroy();
         }
     }
 }

@@ -84,6 +84,7 @@ public class CombatInterface : MonoBehaviour
             button.GetComponentInChildren<Text>().text = ability.AbilityName;
             button.GetComponent<Button>().onClick.AddListener(() =>
             {
+                combatMouseController.OnMouseClickTargetCallback -= SelectTarget;
                 var temp = ability;
                 selectedAbility = temp;
                 MessageManager.Instance.ShowMessage("Select a target");
@@ -111,7 +112,11 @@ public class CombatInterface : MonoBehaviour
 
     private void SelectTarget(CharacterVisual target)
     {
+        if (!CurrentFighter.IsMyTurn)
+            return;
+
         var enemy = target.character;
+        CurrentFighter.TookAction();
 
         switch (enemy)
         {

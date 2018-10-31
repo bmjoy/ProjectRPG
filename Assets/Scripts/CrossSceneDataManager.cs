@@ -11,7 +11,7 @@ public class CrossSceneDataManager : MonoBehaviour
 
     public List<EnemyData> EnemyList { get; private set; }
     public EnemyData EnemyToFight { get; private set; }
-    public List<Hero> Party { get; private set; }
+    public Party Party { get; private set; }
 
     private void Awake()
     {
@@ -20,17 +20,7 @@ public class CrossSceneDataManager : MonoBehaviour
         else Destroy(gameObject);
 
         EnemyList = new List<EnemyData>();
-        Party = new List<Hero>
-        {
-            CharacterRandomizer.GetHeroByClass(CharacterClass.Mage),
-            CharacterRandomizer.GetHeroByClass(CharacterClass.Ranger),
-            CharacterRandomizer.GetHeroByClass(CharacterClass.Warrior)
-        };
-
-        for (int i = 0; i < Random.Range(0,2); i++)
-        {
-            Party.Add(CharacterRandomizer.GetRandomHero());
-        }
+        Party = Party.Instance;
     }
 
     private void Start()
@@ -55,6 +45,7 @@ public class CrossSceneDataManager : MonoBehaviour
         var index = EnemyList.FindIndex(item => item.Enemies == enemy.enemies);
         EnemyToFight = EnemyList[index];
 
+        GameInterfaceManager.Instance.CloseAllInterfaces();
         SceneManager.LoadScene("CombatScene");
     }
 

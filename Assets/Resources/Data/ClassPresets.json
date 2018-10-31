@@ -2,14 +2,14 @@
   {
     "CharacterClass": "Warrior",
     "Stats": {
-      "Strength": 10,
+      "Strength": 8,
       "Dexterity": 6,
       "Intelligence": 3,
-      "Stamina": 10,
+      "Stamina": 9,
       "CritChance": 3,
       "Haste": 5,
       "Armor": 0,
-      "Damage": 5
+      "Damage": 3
     },
     "abilities": [
       "Attack"
@@ -20,12 +20,12 @@
     "Stats": {
       "Strength": 3,
       "Dexterity": 4,
-      "Intelligence": 10,
+      "Intelligence": 8,
       "Stamina": 4,
       "CritChance": 5,
       "Haste": 5,
       "Armor": 0,
-      "Damage": 5
+      "Damage": 3
     },
     "abilities": [
       "Attack",
@@ -36,13 +36,13 @@
     "CharacterClass": "Ranger",
     "Stats": {
       "Strength": 3,
-      "Dexterity": 10,
+      "Dexterity": 8,
       "Intelligence": 4,
-      "Stamina": 7,
+      "Stamina": 6,
       "CritChance": 5,
       "Haste": 5,
       "Armor": 0,
-      "Damage": 5
+      "Damage": 3
     },
     "abilities": [
       "Attack",

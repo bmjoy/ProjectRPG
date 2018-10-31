@@ -41,7 +41,7 @@ public class ItemVisual : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         initialParent = transform.parent;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
-        transform.SetParent(transform.parent.parent.parent.parent);
+        transform.SetParent(transform.parent.parent.parent.parent.parent);
     }
 
     public void OnDrag(PointerEventData eventData)

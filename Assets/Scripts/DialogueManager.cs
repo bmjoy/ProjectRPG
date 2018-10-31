@@ -26,25 +26,32 @@ public class DialogueManager : MonoBehaviour
         dialogueButtons = new List<Button>();
     }
 
-    public void ShowDialogue(Dictionary<string, Action> buttons, string text)
+    public void ShowDialogue(Dictionary<string, DialogueOption> dialogueOptions)
     {
         ClearDialoguePanel();
-        foreach (var option in buttons)
+
+        foreach (var option in dialogueOptions)
         {
             var button = Instantiate(buttonPrefab, dialoguePanel.transform).GetComponent<Button>();
             dialogueButtons.Add(button);
-            button.onClick.AddListener(() => { option.Value(); });
+
+            button.onClick.AddListener(() => { CloseDialogue(option.Value.AutoClose); option.Value.OnClick(); });
             button.GetComponentInChildren<Text>().text = option.Key;
         }
-        dialoguePanel.SetActive(true);
     }
 
     private void ClearDialoguePanel()
     {
-        dialoguePanel.SetActive(false);
         foreach (var button in dialogueButtons)
         {
             Destroy(button.gameObject);
         }
+        dialogueButtons.Clear();
+    }
+
+    private void CloseDialogue(bool shouldClose)
+    {
+        if(shouldClose)
+            GameInterfaceManager.Instance.CloseAllInterfaces();
     }
 }

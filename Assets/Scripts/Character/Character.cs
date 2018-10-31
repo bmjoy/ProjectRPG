@@ -48,4 +48,9 @@ public class Character
                 break;
         }
     }
+
+    public void TookAction()
+    {
+        IsMyTurn = false;
+    }
 }

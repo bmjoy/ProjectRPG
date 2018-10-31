@@ -7,18 +7,20 @@ using UnityEngine;
 
 public class Item : ITooltip
 {
-    public ItemTypes Type;
-    public List<ItemMod> ItemMods;
-    public Sprite Sprite;
+    public ItemTypes Type { get; private set; }
+    public List<ItemMod> ItemMods { get; private set; }
+    public Sprite Sprite { get; private set; }
+    public int Price;
 
     public Item(List<ItemMod> itemMods, ItemTypes type, Sprite sprite)
     {
         ItemMods = itemMods;
         Type = type;
         Sprite = sprite;
+        Price = UnityEngine.Random.Range(5, 10) + ItemMods.Count * 5;
     }
 
-    public string TooltipText => $"{Type}\n" + GetItemModString();
+    public string TooltipText => $"{Type}\n {GetItemModString()}\nPrice:{Price}";
 
     private string GetItemModString()
     {
