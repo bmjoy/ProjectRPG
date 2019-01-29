@@ -18,19 +18,36 @@ public static class ItemGenerator
 
         var itemMods = new List<ItemMod>();
 
+
+        itemMods.AddRange(GetRandomPrefixes(UnityEngine.Random.Range(1,2 + 1)));
+        itemMods.AddRange(GetRandomSuffixes(1));
+
         //Add armor for armors and damage for weapons.
         switch (type)
         {
             case var expression when (type == ItemTypes.Armor || type == ItemTypes.Boots || type == ItemTypes.Gloves || type == ItemTypes.Helmet || type == ItemTypes.Shield):
-                itemMods.Add(GetSuffixByStat(StatTypes.Armor));
+                if(itemMods.Any(mod => mod.Stat == StatTypes.Armor))
+                {
+                    var armor = GetSuffixByStat(StatTypes.Armor);
+                    itemMods.First(mod => mod.Stat == StatTypes.Armor).Value += armor.Value;
+                }
+                else
+                {
+                    itemMods.Add(GetSuffixByStat(StatTypes.Armor));
+                }
                 break;
             case ItemTypes.Weapon:
-                itemMods.Add(GetSuffixByStat(StatTypes.Damage));
+                if (itemMods.Any(mod => mod.Stat == StatTypes.Damage))
+                {
+                    var weapon = GetSuffixByStat(StatTypes.Damage);
+                    itemMods.First(mod => mod.Stat == StatTypes.Damage).Value += weapon.Value;
+                }
+                else
+                {
+                    itemMods.Add(GetSuffixByStat(StatTypes.Damage));
+                }
                 break;
         }
-
-        itemMods.AddRange(GetRandomPrefixes(UnityEngine.Random.Range(1,2 + 1)));
-        itemMods.AddRange(GetRandomSuffixes(1));
 
         return itemMods;
     }

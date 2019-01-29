@@ -20,7 +20,7 @@ public class Item : ITooltip
         Price = UnityEngine.Random.Range(5, 10) + ItemMods.Count * 5;
     }
 
-    public string TooltipText => $"{Type}\n {GetItemModString()}\nPrice:{Price}";
+    public string TooltipText => $"{Type}\n{GetItemModString()}\nPrice:{Price}";
 
     private string GetItemModString()
     {

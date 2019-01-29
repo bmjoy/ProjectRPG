@@ -9,26 +9,82 @@
 [
   {
     "Stat": "Strength",
-    "Name": "of Strength",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 4
   },
   {
     "Stat": "Dexterity",
-    "Name": "of Dexterity",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 4
   },
   {
     "Stat": "Intelligence",
-    "Name": "of Intelligence",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 4
   },
   {
     "Stat": "Stamina",
-    "Name": "of Stamina",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 4
+  },
+  {
+    "Stat": "Strength",
+    "MinValue": 5,
+    "MaxValue": 8
+  },
+  {
+    "Stat": "Dexterity",
+    "MinValue": 5,
+    "MaxValue": 8
+  },
+  {
+    "Stat": "Intelligence",
+    "MinValue": 5,
+    "MaxValue": 8
+  },
+  {
+    "Stat": "Stamina",
+    "MinValue": 5,
+    "MaxValue": 8
+  },
+  {
+    "Stat": "Strength",
+    "MinValue": 9,
+    "MaxValue": 13
+  },
+  {
+    "Stat": "Dexterity",
+    "MinValue": 9,
+    "MaxValue": 13
+  },
+  {
+    "Stat": "Intelligence",
+    "MinValue": 9,
+    "MaxValue": 13
+  },
+  {
+    "Stat": "Stamina",
+    "MinValue": 9,
+    "MaxValue": 13
+  },
+  {
+    "Stat": "Strength",
+    "MinValue": 14,
+    "MaxValue": 18
+  },
+  {
+    "Stat": "Dexterity",
+    "MinValue": 14,
+    "MaxValue": 18
+  },
+  {
+    "Stat": "Intelligence",
+    "MinValue": 14,
+    "MaxValue": 18
+  },
+  {
+    "Stat": "Stamina",
+    "MinValue": 14,
+    "MaxValue": 18
   }
 ]

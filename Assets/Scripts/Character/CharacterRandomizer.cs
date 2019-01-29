@@ -21,13 +21,11 @@ public static class CharacterRandomizer
 
     public static Hero GetRandomHero()
     {
-        var sprite = SpriteManager.GetSprite("Player");
-        return new Hero(sprite, GetClassPreset(GetRandomClass()));
+        return new Hero(GetClassPreset(GetRandomClass()));
     }
 
     public static Hero GetHeroByClass(CharacterClass charclass)
     {
-        var sprite = SpriteManager.GetSprite("Player");
-        return new Hero(sprite, GetClassPreset(charclass));
+        return new Hero(GetClassPreset(charclass));
     }
 }

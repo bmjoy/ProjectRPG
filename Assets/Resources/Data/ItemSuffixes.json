@@ -8,26 +8,82 @@
 [
   {
     "Stat": "CritChance",
-    "Name": "of Crit",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 3
   },
   {
     "Stat": "Haste",
-    "Name": "of Haste",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 3
   },
   {
     "Stat": "Armor",
-    "Name": "of Armor",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 2
   },
   {
     "Stat": "Damage",
-    "Name": "of Damage",
-    "MinValue": 2,
-    "MaxValue": 5
+    "MinValue": 1,
+    "MaxValue": 3
+  },
+  {
+    "Stat": "CritChance",
+    "MinValue": 4,
+    "MaxValue": 7
+  },
+  {
+    "Stat": "Haste",
+    "MinValue": 4,
+    "MaxValue": 7
+  },
+  {
+    "Stat": "Armor",
+    "MinValue": 3,
+    "MaxValue": 4
+  },
+  {
+    "Stat": "Damage",
+    "MinValue": 4,
+    "MaxValue": 7
+  },
+  {
+    "Stat": "CritChance",
+    "MinValue": 8,
+    "MaxValue": 10
+  },
+  {
+    "Stat": "Haste",
+    "MinValue": 8,
+    "MaxValue": 10
+  },
+  {
+    "Stat": "Armor",
+    "MinValue": 5,
+    "MaxValue": 6
+  },
+  {
+    "Stat": "Damage",
+    "MinValue": 8,
+    "MaxValue": 10
+  },
+  {
+    "Stat": "CritChance",
+    "MinValue": 11,
+    "MaxValue": 13
+  },
+  {
+    "Stat": "Haste",
+    "MinValue": 11,
+    "MaxValue": 13
+  },
+  {
+    "Stat": "Armor",
+    "MinValue": 7,
+    "MaxValue": 8
+  },
+  {
+    "Stat": "Damage",
+    "MinValue": 11,
+    "MaxValue": 13
   }
 ]
